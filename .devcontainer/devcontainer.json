@@ -1,0 +1,23 @@
+{
+	"name": "DataLabs",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"ms-azuretools.vscode-azureterraform",
+				"hashicorp.terraform",
+				"pomdtr.excalidraw-editor",
+				"github.vscode-github-actions",
+				"redhat.vscode-yaml",
+				"databricks.databricks"
+			]
+		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
+	}
+
+}
