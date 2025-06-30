@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=bundle_config_schema.json
+bundle:
+  name: api-enrichment
+
+variables:
+  my_cluster_id:
+    description: The ID of an existing cluster.
+    default: 0629-022617-3m3xvvft # TOBE REPLACED
+
+# TOBE REMOVED
+workspace:
+  host: https://dbc-29254c33-0fad.cloud.databricks.com
+
+include:
+    - ./resources/api-enrichment-test-data.job.yml
+    - ./resources/api-enrichment.job.yml
+
+# workspace to deploy to is set in the .databrickscfg file, for development bundles are deployed to the user directory, for production you might use `root_path: /Shared/.bundles/${bundle.name}`
+targets:
+  development:
+    default: true
