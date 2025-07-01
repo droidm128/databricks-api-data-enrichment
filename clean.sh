@@ -1,5 +1,8 @@
 #!/bin/bash
 
+az login
+export ARM_SUBSCRIPTION_ID="$(az account show --output tsv --query "id")"
+
 cd terraform || { echo "Failed to change directory to terraform"; exit 1; }
 
 read -p "Are you sure you want to destroy all Terraform-managed resources and clean the state? (y/N): " confirm
