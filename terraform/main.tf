@@ -8,12 +8,12 @@ resource "azurerm_container_group" "example" {
   location            = azurerm_resource_group.app-rg.location
   resource_group_name = azurerm_resource_group.app-rg.name
   ip_address_type     = "Public"
-  dns_name_label      = "droidm127-databricks-api-data-enrichment"
+  dns_name_label      = "droidm128-databricks-api-data-enrichment"
   os_type             = "Linux"
 
   container {
     name   = "api-app"
-    image  = "${azurerm_container_registry.acr.login_server}/myapp:new2"
+    image  = "ghcr.io/droidm128/databricks-api-data-enrichment/api-app:latest"
     cpu    = "1"
     memory = "1.5"
 

@@ -1,5 +1,4 @@
 # Databricks notebook source
-
 # COMMAND ----------
 # MAGIC %run ./constants
 
@@ -10,8 +9,8 @@
 # COMMAND ----------
 dbutils.widgets.text(InputJobParameters.INPUT_DATA_PATH, "/Workspace/Shared/test-data/sample_data.csv", "")
 dbutils.widgets.text(InputJobParameters.API_URL, "droidm128-databricks-api-data-enrichment.westus.azurecontainer.io:5000/test", "")
-dbutils.widgets.text(InputJobParameters.PARALLELISM, "2", "")
-dbutils.widgets.text(InputJobParameters.RATE_PER_EXECUTOR_PER_SECOND, "2", "")
+dbutils.widgets.text(InputJobParameters.PARALLELISM, "3", "")
+dbutils.widgets.text(InputJobParameters.RATE_PER_EXECUTOR_PER_SECOND, "10", "")
 
 input_data_path = dbutils.widgets.get(InputJobParameters.INPUT_DATA_PATH)
 api_url = dbutils.widgets.get(InputJobParameters.API_URL)
@@ -45,15 +44,14 @@ from pyrate_limiter import Duration, Limiter, Rate, BucketFullException
 
 def get_person_information(login: str, limiter: Limiter) -> pd.DataFrame:
     """Query the API with the given login and return user info as a Pandas Data Frame. Handles errors and returns details."""
-    response = None # requests.get might fail before initializing the variable, so we initialize it to None.
+    response = None
     try:
         limiter.try_acquire("endpoint")
         response = requests.get(f"http://{api_url}", params={"login": login})
         response.raise_for_status() 
-        response_status = response.status_code
         response_body = response.json() 
         return pd.DataFrame([{
-            "response_status_code": response_status,
+            "response_status_code": str(response.status_code),
             "exception": None,
             "response_body": str(response_body),
             "login": login,
@@ -67,9 +65,9 @@ def get_person_information(login: str, limiter: Limiter) -> pd.DataFrame:
     except:
         exception = traceback.format_exc()
         return pd.DataFrame([{
-            "response_status_code": response.status_code if response else None,
+            "response_status_code": str(response.status_code) if response is not None else None,
             "exception": exception,
-            "response_body": str(response.content) if response else None,
+            "response_body": str(response.content) if response is not None else None,
             "login": login,
             "first_name": None,
             "last_name": None,

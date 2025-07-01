@@ -14,7 +14,7 @@ INPUT_DATA_SCHEMA = """
 """
 
 API_RESPONSE_SCHEMA = """
-    response_status_code INT, 
+    response_status_code STRING, 
     exception STRING, 
     response_body STRING, 
     login STRING, 
