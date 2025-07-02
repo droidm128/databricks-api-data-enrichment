@@ -1,5 +1,21 @@
 # Lab Description 
 
+The lab explores one of the common use cases in data engineering — data enrichment via external REST APIs — and demonstrate how it can be implemented in Databricks using PySpark and Pandas UDFs. This use case can appear in multiple forms; it can be part of batch jobs or streaming jobs. In its simplest form, it is quite straightforward: you have a lot of data, you want to retrieve additional information for this data from an external API, and then save the enriched results.
+![Use-case](external-system-enrichment-use-case.excalidraw.png)
+
+There are the following major blocks in the lab:
+
+- Set Up Infrastructure
+- Write and Deploy a Databricks Job
+- Write a UDF that Makes External API Calls
+- Control the Flow of Requests (to avoid overwhelming the external system):
+    - Control parallelism
+    - Control rate limits per executor
+
+# Deployement Architecture 
+
+![Api Enrichment](api-enrichment.excalidraw.png)
+
 # Lab Set up
 
 1. Fork the repository, create a devcontainer from the repository, the devcontainer has all tools you will need for the lab:
@@ -33,10 +49,6 @@
     ```sql
     select * from hive_metastore.default.test_enriched_data 
     ```
-
-# Architecture 
-
-![Api Enrichment](api-enrichment.excalidraw.png)
 
 # References
 - https://community.databricks.com/t5/technical-blog/understanding-pandas-udf-applyinpandas-and-mapinpandas/ba-p/75717
