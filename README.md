@@ -12,7 +12,7 @@ There are the following major blocks in the lab:
     - Control parallelism
     - Control rate limits per executor
 
-# Deployement Architecture 
+# Deployment Architecture 
 
 ![Api Enrichment](api-enrichment.excalidraw.png)
 
