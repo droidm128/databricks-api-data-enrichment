@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=bundle_config_schema.json
+bundle:
+  name: api-enrichment
+
+variables:
+  my_cluster_id:
+    default: # <PUT YOUR CLUSTER_ID HERE>
+
+include:
+    - ./resources/api-enrichment-test-data.job.yml
+    - ./resources/api-enrichment.job.yml
+
+# workspace to deploy to is set in the .databrickscfg file
+targets:
+  development:
+    default: true

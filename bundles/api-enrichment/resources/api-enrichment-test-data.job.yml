@@ -1,0 +1,14 @@
+resources:
+  jobs:
+    api-enrichment-test-data-job:
+      name: "[${bundle.name}] generate-test-data-job"
+      tasks:
+        - task_key: test-data-task
+          existing_cluster_id: ${var.my_cluster_id}
+          notebook_task:
+            notebook_path: ../src/api-enrichment-test-data.py
+            base_parameters:
+              test_data_folder: '/Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/test-data'
+          libraries:
+            - pypi:
+                package: faker
